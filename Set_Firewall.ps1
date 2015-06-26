@@ -1,18 +1,83 @@
-
+﻿
 <#
 .SYNOPSIS
     Set_Firewall
+
 .DESCRIPTION
     Configure the Windows firewall on a permit-by-except basis.
+
 .NOTES
     File Name      : Set_Firewall.ps1
     Author         : Andrew Benson (abenson@gmail.com)
     Prerequisites  : PowerShell 6.0; Windows 11
     Copyright      : (C) 2015 Andrew Benson
+
+.PARAMETER AllowAll
+
+    Configures the firewall to allow all traffic.
+
+.PARAMETER DenyAll
+
+    Configures the firewall to deny all traffic.
+
+.PARAMETER NoPing
+
+    Disables ICMP echo and responses. 
+
+.PARAMETER NoDHCP
+
+    Disables DHCP lease requests.
+
+.PARAMETER Auto
+
+    Configure firewall with exceptions automatically.
+    Implies -OutboundHosts set to "C:\Tools\Scripts\Set_Firewall\Target.Hosts"
+    Implies -InboundHosts  set to "C:\Tools\Scripts\Set_Firewall\Trusted.Hosts"
+
+.PARAMETER TCPPortsOut
+
+    Limit outbound TCP ports to these only. Specified as single ports or ranges, separated by commas. 
+
+.PARAMETER UDPPortsOut
+
+    Limit outbound TCP ports to these only. Specified as single ports or ranges, separated by commas. 
+
+.PARAMETER TCPPortsIn
+
+    Allow inbound TCP ports. Specified as single ports or ranges, separated by commas.
+
+.PARAMETER UDPPortsIn
+
+    Allow inbound UDP ports. Specified as single ports or ranges, separated by commas.
+
+.PARAMETER OutboundHosts
+
+    Limit outbound connections to hosts specified in file. One host or CIDR per line.
+
+.PARAMETER InboundHosts
+
+    Limit inbound connections to hosts specified in file. One host or CIDR per line.
+
 .EXAMPLE
+
+    Set_Firewall -TCPPortsIn 445 -NoPing
+
+    Configure firewall to allow 445 inbound but not respond to ping.
+
+
+.EXAMPLE
+
     Set_Firewall -AllowAll
+
+    Clear all rules (useful for troubleshooting)
+
 .EXAMPLE
-    Set_Firewall -DenyAll
+
+    Set_Firewall -Auto
+
+    Configure firewall automatically.
+    Target.Hosts and Trusted.Hosts must be configured correctly in C:\Tools\Scripts\Set_Firewall 
+
 .LINK
     https://github.com/abenson/SetFirewall
 #>
