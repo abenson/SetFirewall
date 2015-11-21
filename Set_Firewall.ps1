@@ -1,4 +1,24 @@
 ﻿
+# Copyright (c) 2015 Andrew Benson
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 <#
 .SYNOPSIS
     Set_Firewall
@@ -22,7 +42,7 @@
 
 .PARAMETER NoPing
 
-    Disables ICMP echo and responses. 
+    Disables ICMP echo and responses.
 
 .PARAMETER NoDHCP
 
@@ -36,11 +56,11 @@
 
 .PARAMETER TCPPortsOut
 
-    Limit outbound TCP ports to these only. Specified as single ports or ranges, separated by commas. 
+    Limit outbound TCP ports to these only. Specified as single ports or ranges, separated by commas.
 
 .PARAMETER UDPPortsOut
 
-    Limit outbound TCP ports to these only. Specified as single ports or ranges, separated by commas. 
+    Limit outbound TCP ports to these only. Specified as single ports or ranges, separated by commas.
 
 .PARAMETER TCPPortsIn
 
@@ -76,7 +96,7 @@
     Set_Firewall -Auto
 
     Configure firewall automatically.
-    Target.Hosts and Trusted.Hosts must be configured correctly in C:\Tools\Scripts\Set_Firewall 
+    Target.Hosts and Trusted.Hosts must be configured correctly in C:\Tools\Scripts\Set_Firewall
 
 .LINK
     https://github.com/abenson/SetFirewall
@@ -132,7 +152,7 @@ if($AllowAll) {
 
 if($DenyAll) {
     if(-not $Quiet) {
-        Write-Host "Denying all traffic." -ForegroundColor Red 
+        Write-Host "Denying all traffic." -ForegroundColor Red
     }
     New-NetFirewallRule -DisplayName "Deny All In" -Profile Any  -Action Block -Direction Inbound -Enabled True > $null
     New-NetFirewallRule -DisplayName "Deny All Out" -Profile Any  -Action Block -Direction Outbound -Enabled True > $null
@@ -204,7 +224,7 @@ if($OutboundHosts.Length -eq 0) {
             New-NetFirewallRule -DisplayName "ICMP Echo" -Profile Any -Enabled True -Action Allow -Protocol "ICMPv4" -IcmpType 8 -Direction Outbound -RemoteAddress $net > $null
             New-NetFirewallRule -DisplayName "ICMP Echo Reply" -Profile Any -Enabled True -Action Allow -Protocol "ICMPv4" -IcmpType 0 -Direction Outbound -RemoteAddress $net > $null
         }
-        
+
         if($TCPPortsOut.Length -eq 0) {
             if(-not $Quiet) {
                 Write-Host "Allowing Outbound TCP to " -NoNewline
@@ -297,7 +317,7 @@ if($InboundHosts.Length -eq 0) {
             New-NetFirewallRule -DisplayName "Allow ICMP Echo from $net" -Profile Any -Enabled True -Action Allow -Protocol "ICMPv4" -IcmpType 8 -Direction Inbound -RemoteAddress $net > $null
             New-NetFirewallRule -DisplayName "Allow ICMP Echo Reply from $net" -Profile Any -Enabled True -Action Allow -Protocol "ICMPv4" -IcmpType 0 -Direction Inbound -RemoteAddress $net > $null
         }
-        
+
         if($TCPPortsIn.Length -eq 0) {
             if(-not $Quiet) {
                 Write-Host "Allowing Inbound TCP from " -NoNewline
