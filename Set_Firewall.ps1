@@ -19,6 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+$VERSIONSTRING="0.4"
+
 <#
 .SYNOPSIS
     Set_Firewall
@@ -31,6 +33,9 @@
     Author         : Andrew Benson (abenson@gmail.com)
     Prerequisites  : PowerShell 6.0; Windows 11
     Copyright      : (C) 2015 Andrew Benson
+
+.PARAMETER Version
+    Print version information.
 
 .PARAMETER AllowAll
 
@@ -102,7 +107,13 @@
     https://github.com/abenson/SetFirewall
 #>
 
-param([switch]$NoPing,[switch]$NoDHCP,[switch]$Auto,[string]$TCPPortsOut,[string]$UDPPortsOut,[string]$TCPPortsIn,[string]$UDPPortsIn,[string]$OutboundHosts,[string]$InboundHosts,[switch]$Simulate,[switch]$Quiet,[switch]$DenyAll,[switch]$AllowAll,[switch]$Show,[switch]$Help)
+param([switch]$NoPing,[switch]$NoDHCP,[switch]$Auto,[string]$TCPPortsOut,[string]$UDPPortsOut,[string]$TCPPortsIn,[string]$UDPPortsIn,[string]$OutboundHosts,[string]$InboundHosts,[switch]$Simulate,[switch]$Quiet,[switch]$DenyAll,[switch]$AllowAll,[switch]$Show,[switch]$Help,[switch]$Version)
+
+if($Version) {
+    Write-Host "Set-Firewall v" -NoNewLine
+    Write-Host $VERSIONSTRING
+    exit
+}
 
 if($Simulate) {
     echo "Simulation is not supported at this time."
