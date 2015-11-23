@@ -19,8 +19,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-$VERSIONSTRING="0.4"
-
 <#
 .SYNOPSIS
     Set_Firewall
@@ -108,6 +106,8 @@ $VERSIONSTRING="0.4"
 #>
 
 param([switch]$NoPing,[switch]$NoDHCP,[switch]$Auto,[string]$TCPPortsOut,[string]$UDPPortsOut,[string]$TCPPortsIn,[string]$UDPPortsIn,[string]$OutboundHosts,[string]$InboundHosts,[switch]$Simulate,[switch]$Quiet,[switch]$DenyAll,[switch]$AllowAll,[switch]$Show,[switch]$Help,[switch]$Version)
+
+$VERSIONSTRING="0.4"
 
 if($Version) {
     Write-Host "Set-Firewall v" -NoNewLine
