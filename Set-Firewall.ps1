@@ -223,9 +223,8 @@ if($OutboundHosts.Length -eq 0) {
     } else {
         $outbound = Get-Content $OutboundHosts
     }
-
     ForEach($net in $outbound) {
-
+        $net = $net.Trim()
         if(-not $NoPing) {
             if(-not $Quiet) {
                 Write-Host "Allowing ICMP to " -NoNewline
@@ -318,7 +317,7 @@ if($InboundHosts.Length -eq 0) {
     $inbound = Get-Content $InboundHosts
 
     ForEach($net in $inbound) {
-
+        $net = $net.Trim()
         if(-not $NoPing) {
             if(-not $Quiet) {
                 Write-Host "Allowing ICMP from " -NoNewline
