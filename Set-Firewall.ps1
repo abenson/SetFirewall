@@ -241,7 +241,7 @@ if($OutboundHosts.Length -eq 0) {
                 Write-Host $net -ForegroundColor Yellow -NoNewline
                 Write-Host "..."
             }
-            New-NetFirewallRule -DisplayName "Outbound TCP $net $port" -Enabled True -Profile Any -Protocol TCP -Direction Outbound -Action Allow -RemoteAddress $net > $null
+            New-NetFirewallRule -DisplayName "Outbound TCP $net" -Enabled True -Profile Any -Protocol TCP -Direction Outbound -Action Allow -RemoteAddress $net > $null
         } else {
             if(-not $Quiet) {
                 Write-Host "Allowing Outbound TCP to " -NoNewline
