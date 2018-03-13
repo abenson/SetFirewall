@@ -1,5 +1,5 @@
 ﻿
-# Copyright (c) 2015 Andrew Benson
+# Copyright (c) 2018 Andrew Benson
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,8 @@
 .NOTES
     File Name      : Set_Firewall.ps1
     Author         : Andrew Benson (abenson@gmail.com)
-    Prerequisites  : PowerShell 6.0; Windows 11
-    Copyright      : (C) 2015 Andrew Benson
+    Prerequisites  : PowerShell 7.0; Windows 11
+    Copyright      : (C) 2018 Andrew Benson
 
 .PARAMETER Version
     Print version information.
@@ -107,7 +107,7 @@
 
 param([switch]$NoPing,[switch]$NoDHCP,[switch]$Auto,[string]$TCPPortsOut,[string]$UDPPortsOut,[string]$TCPPortsIn,[string]$UDPPortsIn,[string]$OutboundHosts,[string]$InboundHosts,[switch]$Simulate,[switch]$Quiet,[switch]$DenyAll,[switch]$AllowAll,[switch]$Show,[switch]$Help,[switch]$Version)
 
-$VERSIONSTRING="0.4"
+$VERSIONSTRING="0.4.1"
 
 if($Version) {
     Write-Host "Set-Firewall v" -NoNewLine
